@@ -12,7 +12,7 @@
 
 #include <libft.h>
 
-void	ft_strdel(void **as)
+void	ft_strdel(char **as)
 {
 	if (as)
 	{

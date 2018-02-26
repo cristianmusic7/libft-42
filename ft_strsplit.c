@@ -12,7 +12,7 @@
 
 #include <libft.h>
 
-static	char	*allocate_word(char *s, char c, char **words, int num)
+static	char	*allocate_word(char const *s, char c, char **words, int num)
 {
 	int c1;
 	int c2;
@@ -32,7 +32,7 @@ static	char	*allocate_word(char *s, char c, char **words, int num)
 			s++;
 		}
 		words[num][c2] = '\0';
-		return (s);
+		return ((char *)s);
 	}
 	return (NULL);
 }
@@ -66,7 +66,7 @@ static	int		get_number_words(char const *s, char c)
 	return (wordc);
 }
 
-char			**ft_strsplit(char *s, char c)
+char			**ft_strsplit(char const *s, char c)
 {
 	int		c1;
 	char	**words;

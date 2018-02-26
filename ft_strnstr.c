@@ -12,15 +12,15 @@
 
 #include <libft.h>
 
-char	*ft_strnstr(char *str, char *to_find, int len)
+char	*ft_strnstr(const char *str, const char *to_find, size_t len)
 {
-	int c;
-	int fc;
-	int neq;
+	size_t	c;
+	int		fc;
+	int		neq;
 
 	c = 0;
 	if (to_find[c] == '\0')
-		return (str);
+		return ((char *)str);
 	while (str[c] != '\0' && c < len)
 	{
 		fc = 0;
@@ -34,7 +34,7 @@ char	*ft_strnstr(char *str, char *to_find, int len)
 				fc++;
 			}
 			if (!neq)
-				return (str + c);
+				return ((char *)(str + c));
 		}
 		c++;
 	}

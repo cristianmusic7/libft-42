@@ -12,7 +12,7 @@
 
 #include <libft.h>
 
-void	ft_putendl(char *str)
+void	ft_putendl(char const *str)
 {
 	int i;
 
