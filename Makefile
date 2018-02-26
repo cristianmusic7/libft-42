@@ -13,7 +13,11 @@
 NAME = libft.a
 
 SRC = srcs
+
 INC = includes
+
+FLAGS = -Wall -Wextra -Werror
+
 LIBC = $(SRC)/libc/ft_memset.c \
 		$(SRC)/libc/ft_bzero.c \
 		$(SRC)/libc/ft_memcpy.c \
@@ -81,8 +85,9 @@ OBJS = ft_*.o
 all: $(NAME) 
 
 $(NAME):
-	gcc -c -Wall -Wextra -Werror -I$(INC) $(LIBC) $(ADDITIONAL) $(LISTS)
+	gcc -c $(FLAGS) -I$(INC) $(LIBC) $(ADDITIONAL) $(LISTS)
 	ar rc $(NAME) $(OBJS)
+	ranlib $(NAME)
 
 clean:
 	rm -f $(OBJS)
@@ -91,3 +96,5 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+.PHONY: all, clean, fclean, re
