@@ -19,7 +19,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 
 	c1 = ft_strlen(dst);
 	c2 = ft_strlen(src);
-	if (!size || c1 > size)
+	if (!size || c1 >= size)
 		return (size + c2);
 	if (c2 <= (size - c1 - 1))
 		ft_memcpy(dst + c1, src, c2 + 1);
