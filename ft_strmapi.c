@@ -19,7 +19,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 
 	c = 0;
 	new = NULL;
-	if (s)
+	if (s && f)
 	{
 		while (s[c] != '\0')
 			c++;

@@ -19,7 +19,7 @@ char	*ft_strmap(char const *s, char (*f)(char))
 
 	c = 0;
 	new = NULL;
-	if (s)
+	if (s && f)
 	{
 		while (s[c] != '\0')
 			c++;
