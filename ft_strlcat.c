@@ -10,32 +10,23 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-unsigned int	ft_strlcat(char *dest, char *src, unsigned int size)
-{
-	unsigned	int c1;
-	unsigned	int c2;
-	unsigned	int c3;
+#include <libft.h>
 
-	c1 = 0;
-	c2 = 0;
-	c3 = 0;
-	while (dest[c1] != '\0')
-		c1++;
-	while (src[c3] != '\0')
-		c3++;
-	if (c1 <= size)
-	{
-		while (src[c2] != '\0' && c2 < (size - c1 - 1))
-		{
-			dest[c2 + c1] = src[c2];
-			c2++;
-		}
-	}		
-	if (c1 + 1 > size)
-		return (size + c3);
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
+{
+	size_t c1;
+	size_t c2;
+
+	c1 = ft_strlen(dst);
+	c2 = ft_strlen(src);
+	if (!size || c1 > size)
+		return (size + c2);
+	if (c2 <= (size - c1 - 1))
+		ft_memcpy(dst + c1, src, c2 + 1);
 	else
 	{
-		dest[c1 + c2] = '\0';
-		return (c1 + c3);		
+		ft_memcpy(dst + c1, src, (size - c1 - 1));
+		*(dst + size - 1) = '\0';
 	}
+	return (c1 + c2);
 }
