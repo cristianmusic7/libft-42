@@ -15,15 +15,17 @@
 void	*ft_memalloc(size_t size)
 {
 	unsigned char	*mem;
+	void			*copy;
 	size_t			i;
 
 	i = 0;
-	mem = malloc(size);
-	if (mem)
+	copy = malloc(size);
+	mem = copy;
+	if (copy)
 	{
 		while (i++ < size)
 			mem[i - 1] = 0;
-		return (mem);
+		return (copy);
 	}
 	else
 		return (NULL);
