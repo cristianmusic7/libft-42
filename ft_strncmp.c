@@ -10,16 +10,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_strncmp(char *s1, char *s2, unsigned int n)
+#include <libft.h>
+
+int		ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	unsigned int c;
+	size_t c;
 
 	c = 0;
-	while (s1[c] != '\0' && c <= n)
+	while (s1[c] != '\0' && c < n)
 	{
 		if ((unsigned char)s1[c] != (unsigned char)s2[c])
 			return ((unsigned char)s1[c] - (unsigned char)s2[c]);
 		c++;
 	}
+	if (c == n)
+		return ((unsigned char)s1[c - 1] - (unsigned char)s2[c - 1]);
 	return ((unsigned char)s1[c] - (unsigned char)s2[c]);
 }

@@ -25,7 +25,7 @@ int		ft_strnequ(char const *s1, char const *s2, size_t n)
 				return (0);
 			c++;
 		}
-		if (s1[c] == s2[c])
+		if (n == 0 || s1[c - 1] == s2[c - 1])
 			return (1);
 	}
 	return (0);
