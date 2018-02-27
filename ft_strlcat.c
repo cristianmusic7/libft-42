@@ -30,11 +30,12 @@ unsigned int	ft_strlcat(char *dest, char *src, unsigned int size)
 			dest[c2 + c1] = src[c2];
 			c2++;
 		}
-	}
-	if (size != 0 && c1 <= size)
-		dest[c1 + c2] = '\0';
-	if (c1 > size)
+	}		
+	if (c1 + 1 > size)
 		return (size + c3);
 	else
-		return (c1 + c3);
+	{
+		dest[c1 + c2] = '\0';
+		return (c1 + c3);		
+	}
 }
