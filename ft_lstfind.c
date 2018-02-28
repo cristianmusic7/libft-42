@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdel.c                                        :+:      :+:    :+:   */
+/*   ft_lstfind.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cfranco <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/25 18:43:28 by cfranco           #+#    #+#             */
-/*   Updated: 2018/02/27 23:40:55 by cfranco          ###   ########.fr       */
+/*   Created: 2018/02/27 23:37:38 by cfranco           #+#    #+#             */
+/*   Updated: 2018/02/27 23:37:41 by cfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include "libft.h"
 
-void	ft_lstdel(t_list **alst, void (*del)(void *, size_t))
+t_list	*ft_lstfind(t_list *begin_list, void *data_ref, int (*cmp)())
 {
-	t_list *temp;
-
-	if (alst)
+	if (begin_list == NULL)
 	{
-		while ((*alst)->next != NULL)
-		{
-			temp = *alst;
-			ft_lstdelone(&(*alst), (*del));
-			*alst = temp->next;
-		}
-		ft_lstdelone(&(*alst), (*del));
+		return (NULL);
 	}
+	while (begin_list != NULL)
+	{
+		if ((*cmp)(begin_list->content, data_ref) == 0)
+			return (begin_list);
+		begin_list = begin_list->next;
+	}
+	return (NULL);
 }

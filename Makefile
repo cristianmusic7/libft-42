@@ -70,6 +70,10 @@ LIBC = ft_memset.c \
 		ft_putnbr_fd.c \
 		ft_swap.c \
 		ft_sqrt.c \
+		ft_pow.c \
+		ft_lstlen.c \
+		ft_lstfind.c \
+		ft_lstsort.c \
 		ft_lstnew.c \
 		ft_lstdelone.c \
 		ft_lstdel.c \

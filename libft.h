@@ -88,5 +88,9 @@ t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 
 void				ft_swap(int *a, int *b);
 int					ft_sqrt(int nb);
+int					ft_pow(int nb, int power);
+int					ft_lstlen(t_list *lst);
+t_list				*ft_lstfind(t_list *lst, void *data_ref, int (*cmp)());
+t_list				*ft_lstsort(t_list *lst, int (*cmp)());
 
 #endif
