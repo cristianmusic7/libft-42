@@ -1,85 +1,95 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhouser <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: cfranco <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/29 11:59:54 by mhouser           #+#    #+#             */
-/*   Updated: 2017/09/29 12:00:00 by mhouser          ###   ########.fr       */
+/*   Created: 2018/02/24 16:06:01 by cfranco           #+#    #+#             */
+/*   Updated: 2018/02/24 16:06:02 by cfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 
-void str_list_freeer(struct string *str_list)
+static	char	*allocate_word(char const *s, char c, char **words, int num)
 {
-    if((*str_list).count != -1)
-        str_list_freeer((*str_list).next);
-    free(str_list);
+	int c1;
+	int c2;
+
+	c1 = 0;
+	c2 = 0;
+	while (*s == c)
+		s++;
+	while (s[c1] != c)
+		c1++;
+	words[num] = (char*)malloc(sizeof(char) * c1);
+	if (words[num])
+	{
+		while (*s != c)
+		{
+			words[num][c2++] = *s;
+			s++;
+		}
+		words[num][c2] = '\0';
+		return ((char *)s);
+	}
+	return (NULL);
 }
 
-void ft_str_arr_builder(char **str_arr, struct string *str_list)
+static	int		get_number_words(char const *s, char c)
 {
-    while (*str_arr)
-    {
-        *str_arr++ = (*str_list).str;
-        str_list = (*str_list).next;
-    }
+	int wordc;
+	int flag;
+
+	wordc = 0;
+	flag = 0;
+	while (*s != '\0')
+	{
+		while (*s == c)
+		{
+			if (flag)
+			{
+				wordc++;
+				flag = 0;
+			}
+			s++;
+		}
+		if (*s != '\0')
+			flag = 1;
+		else
+			return (wordc);
+		s++;
+	}
+	if (flag)
+		wordc++;
+	return (wordc);
 }
 
-int ft_strlink(char *s, struct string *current_str, struct string **mod_pnt, char delimiter)
+char			**ft_strsplit(char const *s, char c)
 {
-    int length;
-    int offset;
-    int sled;
+	int		c1;
+	char	**words;
+	int		num;
+	int		offset;
 
-    length = 0;
-    sled = 0;
-    while (*s++ == delimiter)
-        sled++;
-    s--;
-    if(!*s)
-        return(sled + 1);
-    while (s[length++] != delimiter && s[length - 1]);
-    (*current_str).next = (struct string *)malloc(sizeof(struct string));
-    (*(*current_str).next).count = (*current_str).count + 1;
-    (*current_str).str = malloc(sizeof(char) * length);
-    offset = length;
-    while(--length)
-        *(*current_str).str++ = *s++;
-    *(*current_str).str = '\0';
-    (*current_str).str = ((*current_str).str - (offset - 1));
-    *mod_pnt = (*current_str).next;
-    return(offset + sled);
+	if (s && c)
+	{
+		c1 = 0;
+		offset = 0;
+		num = get_number_words(s, c);
+		words = (char**)malloc((num + 1) * sizeof(char*));
+		if (words)
+		{
+			while (c1 < num)
+			{
+				s = allocate_word(s, c, words, c1);
+				c1++;
+			}
+			words[c1] = (char*)malloc(sizeof(char));
+			words[c1] = NULL;
+			return (words);
+		}
+	}
+	return (NULL);
 }
-
-char        **ft_strsplit(char const *s, char c)
-{
-    char **str_arr;
-    struct string *str_list;
-    struct string *current_str;
-    struct string **mod_pnt;
-    int offset;
-
-    current_str = (struct string *)malloc(sizeof(struct string));
-    (*current_str).count = 0;
-    str_list = current_str;
-    mod_pnt = &current_str;
-    while(s && *(char *)s)
-    {
-        if (*(char *)s++ == c || str_list == current_str)
-        {
-            offset = ft_strlink((char *)--s, current_str, mod_pnt, c);
-            s = s + (offset - 1);
-        }
-    }
-    str_arr = (char **)malloc(sizeof(char *) * ((*current_str).count + 1));
-    str_arr[(*current_str).count] = 0;
-    while((*current_str).count--)
-        str_arr[(*current_str).count] = (char *)current_str;
-    ft_str_arr_builder(str_arr, str_list);
-    str_list_freeer(str_list);
-    return(str_arr);
-}
-//
