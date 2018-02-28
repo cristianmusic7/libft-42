@@ -21,12 +21,12 @@ static	char	*allocate_word(char const *s, char c, char **words, int num)
 	c2 = 0;
 	while (*s == c)
 		s++;
-	while (s[c1] != c)
+	while (s[c1] != c && s[c1] != '\0')
 		c1++;
 	words[num] = (char*)malloc(sizeof(char) * c1);
 	if (words[num])
 	{
-		while (*s != c)
+		while (*s != c && *s != '\0')
 		{
 			words[num][c2++] = *s;
 			s++;
