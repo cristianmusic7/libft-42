@@ -20,17 +20,4 @@ void	ft_putnbr_fd(int nb, int fd)
 
 	sign = 1;
 	modh = 1;
-	if (nb < 0)
-	{
-		ft_putchar_fd('-', fd);
-		sign = -1;
-	}
-	while (modh <= (nb / 10) * sign)
-		modh *= 10;
-	while (modh >= 1)
-	{
-		c = ((nb / modh) % 10 * sign) + '0';
-		ft_putchar_fd(c, fd);
-		modh /= 10;
-	}
 }
