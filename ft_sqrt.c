@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strmap.c                                        :+:      :+:    :+:   */
+/*   ft_sqrt.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cfranco <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/22 14:45:37 by cfranco           #+#    #+#             */
-/*   Updated: 2018/02/22 14:45:39 by cfranco          ###   ########.fr       */
+/*   Created: 2018/01/13 13:55:47 by cfranco           #+#    #+#             */
+/*   Updated: 2018/01/13 19:07:37 by cfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
-
-char	*ft_strmap(char const *s, char (*f)(char))
+int	ft_sqrt(int nb)
 {
-	char	*str;
-	int		len;
+	int pow;
 
-	len = ft_strlen(s);
-	str = ft_strnew(len);
-	while (*s)
+	pow = 1;
+	if (nb <= 0)
+		return (0);
+	while (pow * pow < nb)
 	{
-		*str = f(*s++);
-		str++;
+		pow++;
 	}
-	return (str -= len);
+	if (pow * pow == nb)
+		return (pow);
+	else
+		return (0);
 }
